@@ -6,7 +6,6 @@ ARG GH_TOKEN
 FROM docker.io/google/cloud-sdk:377.0.0-slim AS fetcher
 
 WORKDIR /work
-RUN mkdir -p /work/jekyll/_data/haiku/
 
 # install fetcher dependencies 
 RUN pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib pyyaml
@@ -14,6 +13,7 @@ RUN pip3 install google-api-python-client google-auth-httplib2 google-auth-oauth
 # fetch data
 ADD fetcher/fetch-haiku.py /work/fetcher/
 ARG GCP_API_KEY
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" /tmp/skipcache
 RUN python3 fetcher/fetch-haiku.py /work/out
 
 FROM docker.io/ruby:3 AS jekyll-build
