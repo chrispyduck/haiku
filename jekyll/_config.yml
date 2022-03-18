@@ -2,7 +2,7 @@ title: Haiku of Sev'ral / Cloud Native Developers' / Misery at Work
 email: null
 description: >- 
   ...
-baseurl: ""
+baseurl: /haiku
 url: https://chrispyduck.github.io/haiku/
 domain: chrispyduck.github.io
 plugins: []

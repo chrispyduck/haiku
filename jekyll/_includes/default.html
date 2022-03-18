@@ -17,17 +17,17 @@
 	<![endif]-->
 
 	<!-- Le styles -->
-	<link href="{{ site.BASE_PATH }}/assets/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="{{ site.BASE_PATH }}/assets/resources/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-	<link href="{{ site.BASE_PATH }}/assets/resources/syntax/syntax.css" rel="stylesheet">
-	<link href="{{ site.BASE_PATH }}/assets/css/style.css" rel="stylesheet">
+	<link href="{{ '/assets/resources/bootstrap/css/bootstrap.min.css' | relative_url }}" rel="stylesheet">
+	<link href="{{ '/assets/resources/font-awesome/css/font-awesome.min.css' | relative_url }}" rel="stylesheet">
+	<link href="{{ '/assets/resources/syntax/syntax.css' | relative_url }}" rel="stylesheet">
+	<link href="{{ '/assets/css/style.css' | relative_url }}" rel="stylesheet">
 
 	<!-- Le fav and touch icons -->
-	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" href="/assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/favicon/apple-touch-icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" href="{{ '/assets/favicon/favicon-32x32.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/favicon/favicon-16x16.png' | relative_url }}">
 
-	<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.BASE_PATH }}/feed.xml">
+	<link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
 </head>
 
 <body>
@@ -55,8 +55,8 @@
 				<i class="fa fa-envelope"></i>
 			</a>
 			{% endif %}
-			<a class="navbar-brand" href="{{ site.BASE_PATH }}/">
-				<img src="{{ site.BASE_PATH }}/assets/images/zen.gif" class="img-circle" height="35" width="35" />
+			<a class="navbar-brand" href="{{ '/' | relative_url }}">
+				<img src="{{ '/assets/images/zen.gif' | relative_url }}" class="img-circle" height="35" width="35" />
 				{{ site.title }}
 			</a>
 		</div>
@@ -64,9 +64,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="{{ site.BASE_PATH }}/">Home</a></li>
-				<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}">Categories</a></li>
-				<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}">Tags</a></li>
+				<li class="active"><a href="{{ '/' | relative_url }}">Home</a></li>
+				<li><a href="{{ site.categories_path | relative_url }}">Categories</a></li>
+				<li><a href="{{ site.tags_path | relative_url }}">Tags</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</nav>
@@ -77,9 +77,9 @@
 			<i class="fa fa-bars"></i>
 		</button>
 		<ul class="dropdown-menu" role="menu">
-			<li><a href="{{ site.BASE_PATH}}/"><i class="fa fa-home"></i>Home</a></li>
-			<li><a href="{{ site.BASE_PATH}}/{{ site.categories_path }}"><i class="fa fa-folder"></i>Categories</a></li>
-			<li><a href="{{ site.BASE_PATH}}/{{ site.tags_path }}"><i class="fa fa-tags"></i>Tags</a></li>
+			<li><a href="{{ '/' | relative_url }}"><i class="fa fa-home"></i>Home</a></li>
+			<li><a href="{{ site.categories_path | relative_url }}"><i class="fa fa-folder"></i>Categories</a></li>
+			<li><a href="{{ site.tags_path | relative_url }}"><i class="fa fa-tags"></i>Tags</a></li>
 			<li class="divider"></li>
 			<li><a href="#"><i class="fa fa-arrow-up"></i>Top of Page</a></li>
 		</ul>
@@ -100,8 +100,8 @@
 		</footer>
 	</div>
 
-	<script type="text/javascript" src="{{ site.BASE_PATH }}/assets/resources/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="{{ site.BASE_PATH }}/assets/resources/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="{{ site.BASE_PATH }}/assets/js/app.js"></script>
+	<script type="text/javascript" src="{{ '/assets/resources/jquery/jquery.min.js' | relative_url }}"></script>
+	<script type="text/javascript" src="{{ '/assets/resources/bootstrap/js/bootstrap.min.js' | relative_url }}"></script>
+	<script type="text/javascript" src="{{ '/assets/js/app.js' | relative_url }}"></script>
 </body>
 </html>
