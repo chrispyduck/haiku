@@ -3,13 +3,9 @@ email: null
 description: >- 
   ...
 baseurl: ""
-url: https://chrispyduck.github.io 
+url: https://chrispyduck.github.io/haiku/
 domain: chrispyduck.github.io
-#google_analytics: G-QDEXB4N5LL
-#theme: null
 plugins: []
 exclude: 
 - Gemfile
 - Gemfile.lock
-
-#sidebar_background_image: 
