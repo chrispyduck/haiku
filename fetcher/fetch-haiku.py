@@ -56,19 +56,20 @@ def main():
         log('Transforming results to yaml files in ' + outdir)
         ctr = 0
         for row in values:
-            row_id = hashlib.sha1(row[0].encode()).hexdigest()
-            text = list(filter(None, row[2].split('\n')))
-            haiku = [{
-                '_id': row_id,
-                'timestamp': datetime.datetime.strptime(row[0], '%m/%d/%Y %H:%M:%S').isoformat(),
-                'author': row[1],
-                'text': text
-            }]
-            with open(outdir + '/' + row_id + r'.yaml', 'w') as file:
-                yaml.dump(haiku, file)
-                log('Wrote ' + row_id + '.yaml')
-            ctr += 1
-
+            if len(row) >= 3:
+                row_id = hashlib.sha1(row[0].encode()).hexdigest()
+                text = list(filter(None, row[2].split('\n')))
+                haiku = [{
+                    '_id': row_id,
+                    'timestamp': datetime.datetime.strptime(row[0], '%m/%d/%Y %H:%M:%S').isoformat(),
+                    'author': row[1],
+                    'text': text
+                }]
+                with open(outdir + '/' + row_id + r'.yaml', 'w') as file:
+                    yaml.dump(haiku, file)
+                    log('Wrote ' + row_id + '.yaml')
+                ctr += 1
+        
         log('Generated ' + str(ctr) + ' files')
     except HttpError as err:
         log(err)
