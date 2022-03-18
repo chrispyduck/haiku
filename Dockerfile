@@ -33,26 +33,36 @@ RUN jekyll build
 
 FROM docker.io/alpine/git:v2.32.0 AS publish
 # configure git client
-RUN <<END_CONFIGURE sh 
+RUN <<END_CONFIGURE sh
+set -eu 
 git config --global user.name 'GitHub Action'
 git config --global user.email 'chrispyduck@users.noreply.github.com'
+mkdir -p ~/.ssh
+ssh-keyscan github.com >> ~/.ssh/known_hosts
 END_CONFIGURE
 
 # clone gh-pages branch and replace contents with newly build page
-ARG GH_TOKEN
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" /tmp/skipcache
-RUN git clone --depth 1 --branch gh-pages https://x-access-token:${GH_TOKEN}@github.com/chrispyduck/haiku.git
+WORKDIR /work
+#RUN --mount=type=secret,id=deploy_key,target=/root/.ssh/id_rsa <<END_CLONE sh
+RUN --mount=type=ssh <<END_CLONE sh
+git clone --depth 1 --branch gh-pages git@github.com:chrispyduck/haiku.git
+END_CLONE
+WORKDIR /work/haiku
 RUN rm -rf *
 COPY --from=jekyll-build /work/_site .
 
 # see if anything changed
-RUN <<END_PUSH sh
-if [[ $(git status --porcelain) ]]; then 
+#RUN --mount=type=secret,id=deploy_key,target=/root/.ssh/id_rsa <<END_PUSH sh
+RUN --mount=type=ssh <<END_PUSH sh
+git diff-index --quiet HEAD --
+if [ "$?" == "0" ]; then 
+  echo "No changes detected. All done!"
+else 
   echo "Changes detected. Publishing."
+  set -e
   git add -A
   git commit -m "automatic publish"
   git push
-else 
-  echo "No changes detected. All done!"
 fi
 END_PUSH

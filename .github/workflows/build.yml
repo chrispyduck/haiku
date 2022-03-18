@@ -10,11 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.DEPLOY_KEY }}
     - name: build
       uses: docker/build-push-action@v2
       with:
         context: .
         push: false
+        ssh: |
+            default=${{ env.SSH_AUTH_SOCK }}
       env:
         GCP_API_KEY: ${{secrets.GCP_API_KEY}}
-        GH_TOKEN: ${{secrets.GH_TOKEN}}
+      
