@@ -55,14 +55,7 @@ COPY --from=jekyll-build /work/_site .
 # see if anything changed
 #RUN --mount=type=secret,id=deploy_key,target=/root/.ssh/id_rsa <<END_PUSH sh
 RUN --mount=type=ssh <<END_PUSH sh
-git diff-index --quiet HEAD --
-if [ "$?" == "0" ]; then 
-  echo "No changes detected. All done!"
-else 
-  echo "Changes detected. Publishing."
-  set -e
-  git add -A
-  git commit -m "automatic publish"
-  git push
-fi
+set -e
+git add -A
+git commit -m "automatic publish" && git push
 END_PUSH
