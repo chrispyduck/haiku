@@ -20,6 +20,5 @@ jobs:
         push: false
         ssh: |
             default=${{ env.SSH_AUTH_SOCK }}
-      env:
-        GCP_API_KEY: ${{secrets.GCP_API_KEY}}
-      
+        build-args: |
+          GCP_API_KEY=${{secrets.GCP_API_KEY}}
