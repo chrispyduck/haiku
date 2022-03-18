@@ -44,7 +44,6 @@ END_CONFIGURE
 # clone gh-pages branch and replace contents with newly build page
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" /tmp/skipcache
 WORKDIR /work
-#RUN --mount=type=secret,id=deploy_key,target=/root/.ssh/id_rsa <<END_CLONE sh
 RUN --mount=type=ssh <<END_CLONE sh
 git clone --depth 1 --branch gh-pages git@github.com:chrispyduck/haiku.git
 END_CLONE
@@ -53,9 +52,7 @@ RUN rm -rf *
 COPY --from=jekyll-build /work/_site .
 
 # see if anything changed
-#RUN --mount=type=secret,id=deploy_key,target=/root/.ssh/id_rsa <<END_PUSH sh
 RUN --mount=type=ssh <<END_PUSH sh
-set -e
 git add -A
 git commit -m "automatic publish" && git push
 END_PUSH
