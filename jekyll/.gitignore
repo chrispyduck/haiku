@@ -1,0 +1,7 @@
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
+.DS_Store
+_site
+_data/haiku
