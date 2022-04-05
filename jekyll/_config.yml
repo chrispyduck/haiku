@@ -5,7 +5,15 @@ description: >-
 baseurl: /haiku
 url: https://chrispyduck.github.io/haiku/
 domain: chrispyduck.github.io
-plugins: []
+plugins: 
+- jekyll-datapage-generator
 exclude: 
 - Gemfile
 - Gemfile.lock
+
+page_gen:
+- data: authors
+  template: author
+  dir: authors
+  name_expr: record['_id']
+  title_expr: '"By Author: " + record["_id"]'

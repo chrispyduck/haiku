@@ -1,0 +1,10 @@
+---
+layout: page
+---
+
+<ul class="haiku-feed">
+{% for haiku_hash in site.data.haiku reversed %}
+{% assign haiku = haiku_hash[1] %}
+{% include haiku.html haiku=haiku %}
+{% endfor %}
+</ul>

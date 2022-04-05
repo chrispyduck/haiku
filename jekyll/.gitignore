@@ -3,5 +3,5 @@
 .jekyll-metadata
 vendor
 .DS_Store
-_site
-_data/haiku
+/_site
+/_data

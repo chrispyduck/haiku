@@ -1,6 +1,6 @@
 <!-- sidebar.html -->
 <header class="sidebar-header" role="banner">
-	<a href="{{ site.url }}/">
+	<a href="{{ '/' | relative_url }}">
 		<img src="{{ '/assets/images/zen.gif' | relative_url }}" class="img-circle" height="150" width="150" />
 	</a>
 	<h3 class="title">
@@ -13,6 +13,25 @@
 	{{ site.author.bio }}
 </div>
 {% endif %}
+<div id="authors" class="drilldown">
+	<h3>Authors</h3>
+	<ul>
+		<li>
+			<a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>
+				all authors ({{ site.data.haiku | size }})
+			</a>
+		</li>
+		{% for author_hash in site.data.authors %}
+		{% assign author = author_hash[1] %}
+		<li>
+			{% capture author_url %}/authors/{{ author._id }}.html{% endcapture %}
+			<a href="{{ author_url | relative_url }}" {% if page.url == author_url %}class="active"{% endif %}>
+				{{ author.name }} ({{ author.entries | size }})
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
 
 <div id="contact-list" class="text-center">
 	<ul class="list-unstyled list-inline">

@@ -27,7 +27,7 @@ RUN bundle install
 
 # build page
 COPY jekyll /work
-COPY --from=fetcher /work/out/ /work/_data/haiku/
+COPY --from=fetcher /work/out/ /work/_data/
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" /tmp/skipcache
 RUN jekyll build 
 
