@@ -11,11 +11,11 @@ WORKDIR /work
 RUN pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib pyyaml
 
 # fetch data
-ADD fetcher/fetch-haiku.py /work/fetcher/
+ADD fetcher/ /work/fetcher/
 ARG GCP_API_KEY
 ENV GCP_API_KEY=${GCP_API_KEY}
 ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" /tmp/skipcache
-RUN python3 fetcher/fetch-haiku.py /work/out
+RUN python3 fetcher/generator.py /work/out
 
 FROM docker.io/ruby:3 AS jekyll-build
 RUN gem install bundler
