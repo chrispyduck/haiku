@@ -10,6 +10,7 @@ body{
 	padding-top: 10%;
 	background-color: #285b0b;
 	color: #fff;
+	max-width: 350px;
 }
 
 .sidebar-header {
@@ -35,6 +36,45 @@ a.nav-link i{
 	font-size: 16px;
 }
 a.nav-link:hover { color: #777; }
+
+
+.sidebar .drilldown:before {
+	content: ' ';
+	border-top: solid 1px #777;
+	margin-top: 4em;
+	display: block;
+}
+
+.sidebar .drilldown {
+	margin: 4em 1em;
+}
+
+.sidebar .drilldown h3 {
+	margin: 1em;
+}
+
+.sidebar .drilldown ul {
+	list-style-type: none;
+}
+
+.sidebar .drilldown ul li {
+	margin: 0.25em;
+	position: relative;
+}
+
+.sidebar .drilldown a {
+	color: white;
+}
+.sidebar .drilldown a.active:before {
+	display: inline-block;
+	content: '🍃';
+	margin-right: -1em;
+	position: absolute;
+	left: -2em;
+}
+.sidebar .drilldown a:hover {
+	color: #777;
+}
 
 #bio {
 	font-family: "Courier New", Courier, monospace;
@@ -190,18 +230,23 @@ ul.dropdown-menu>li>a>i.fa {
 }
 
 .haiku-feed {
-	margin: 3em;
+	margin: 1em;
 }
 
 .haiku {
 	font-size: 120%;
 	list-style-type: none;
+	display: inline-block;
+	width: 25em;
+	height: 20em;
+	margin: 1em;
 }
 
-.haiku + .haiku:before {
+.haiku:after {
 	content: '🍃';
-	font-size: 600%;
-	margin: 1em;
+	font-size: 500%;
+	margin: 1.2em;
+	opacity: 0.2;
 }
 
 .haiku > .text {
@@ -212,8 +257,9 @@ ul.dropdown-menu>li>a>i.fa {
 }
 
 .haiku > .signature:before {
-	content: '--';
+	content: '—';
 	margin: 0.5em;
+	margin-bottom: 1em;
 }
 
 .haiku > .signature {
