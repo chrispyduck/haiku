@@ -1,6 +1,7 @@
 from abc import abstractclassmethod
 import time
 import yaml 
+import re 
 
 class YamlFileFormat:
   def __init__(self, id):
@@ -18,12 +19,12 @@ class YamlFileFormat:
         print(f'Wrote file: {filename}')
 
 class Haiku(YamlFileFormat):
-  def __init__(self, date, author, text):
+  def __init__(self, date, author, text, topics):
     super().__init__(f'{int(time.mktime(date.timetuple()))}')
     self.date = date
     self.author = author
     self.text = text
-    self.topics = []
+    self.topics = topics
     
   def to_raw_object(self):
     return {
@@ -36,7 +37,7 @@ class Haiku(YamlFileFormat):
 
 class Topic(YamlFileFormat):
   def __init__(self, name):
-    super().__init__(name)
+    super().__init__(re.sub('[^a-z0-9]', '-', name.lower()))
     self.name = name
     self.entries = []
 

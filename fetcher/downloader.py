@@ -1,10 +1,11 @@
 import datetime
+from pprint import pprint
 
 from googleapiclient.discovery import build
 from yaml_file_types import Haiku
 
 SPREADSHEET_ID = '163TTTMqbu_og6vOaRie8X-LGADXw-xZ904SU9ypDr38'
-RANGE_NAME = 'Haiku!A2:C'
+RANGE_NAME = 'Haiku!A2:D'
 
 def fetch_haiku(api_key):
   """Obtains Haiku objects from the haiku spreadsheet"""
@@ -35,11 +36,13 @@ def process_rows(rows):
 
 def process_row(row):
   """Given a raw table row, return a Haiku object, or False if the row is invalid"""
-  if not len(row) >= 3:
+  pprint(row)
+  if len(row) < 4:
     return False
 
   date = datetime.datetime.strptime(row[0], '%m/%d/%Y %H:%M:%S')
   author = row[1]
   text = list(filter(None, row[2].split('\n')))
+  topics = [topic.strip() for topic in row[3].split(';')] if row[3] else []
   
-  return Haiku(date, author, text)
+  return Haiku(date, author, text, topics)

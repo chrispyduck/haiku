@@ -38,19 +38,20 @@ a.nav-link i{
 a.nav-link:hover { color: #777; }
 
 
-.sidebar .drilldown:before {
+.sidebar .drilldown-group:before {
 	content: ' ';
 	border-top: solid 1px white;
 	margin: 4em 0;
 	display: block;
 }
 
-.sidebar .drilldown {
+.sidebar .drilldown-group {
 	margin: 4em 1em;
 }
 
 .sidebar .drilldown h3 {
 	margin: 1em;
+	position: relative;
 }
 
 .sidebar .drilldown ul {
@@ -72,6 +73,11 @@ a.nav-link:hover { color: #777; }
 	position: absolute;
 	left: -2em;
 }
+
+.sidebar .drilldown h3 a.active:before {
+	left: -1.5em
+}
+
 .sidebar .drilldown a:hover {
 	color: #777;
 }

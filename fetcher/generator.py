@@ -26,16 +26,27 @@ class SiteDataGenerator:
 
     def process_authors(self):
         for haiku in self.haiku:
-            if not haiku.author in self.authors:
+            if haiku.author not in self.authors:
                 author = self.authors[haiku.author] = Author(haiku.author)
             else:
                 author = self.authors[haiku.author]
 
             author.entries.append(haiku.id)
 
+    def process_topics(self):
+        for haiku in self.haiku:
+            for topic_name in haiku.topics:
+                if topic_name not in self.topics:
+                    topic = self.topics[topic_name] = Topic(topic_name)
+                else:
+                    topic = self.topics[topic_name]
+
+                topic.entries.append(haiku.id)
+
     def write_files(self):
         [haiku.write(self.make_outdir('haiku')) for haiku in self.haiku]
         [author.write(self.make_outdir('authors')) for author in self.authors.values()]
+        [topic.write(self.make_outdir('topics')) for topic in self.topics.values()]
 
 
 if __name__ == '__main__':
@@ -60,4 +71,5 @@ if __name__ == '__main__':
     generator = SiteDataGenerator(outdir)
     generator.load_haiku(api_key)
     generator.process_authors()
+    generator.process_topics()
     generator.write_files()

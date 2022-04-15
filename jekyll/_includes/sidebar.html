@@ -4,8 +4,8 @@
 		<img src="{{ '/assets/images/zen.gif' | relative_url }}" class="img-circle" height="150" width="150" />
 	</a>
 	<h3 class="title">
-        <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-    </h3>
+		<a href="{{ '/' | relative_url }}">{{ site.title }}</a>
+	</h3>
 </header>
 
 {% if site.author.bio %}
@@ -13,24 +13,48 @@
 	{{ site.author.bio }}
 </div>
 {% endif %}
-<div id="authors" class="drilldown">
-	<h3>Authors</h3>
-	<ul>
-		<li>
-			<a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>
-				all authors ({{ site.data.haiku | size }})
+
+<div class="drilldown-group">
+	<div class="drilldown">
+		<h3>
+			<a href="{{ '/' | relative_url }}" {% if page.url=='/' %}class="active" {% endif %}>
+				Everything ({{ site.data.haiku | size }})
 			</a>
-		</li>
-		{% for author_hash in site.data.authors %}
-		{% assign author = author_hash[1] %}
-		<li>
-			{% capture author_url %}/authors/{{ author._id }}.html{% endcapture %}
-			<a href="{{ author_url | relative_url }}" {% if page.url == author_url %}class="active"{% endif %}>
-				{{ author.name }} ({{ author.entries | size }})
-			</a>
-		</li>
-		{% endfor %}
-	</ul>
+		</h3>
+	</div>
+
+	<div id="authors" class="drilldown">
+		<h3>Authors</h3>
+		<ul>
+			{% for author_hash in site.data.authors %}
+			{% assign author = author_hash[1] %}
+			<li>
+				{% capture author_url %}/authors/{{ author._id }}.html{% endcapture %}
+				<a href="{{ author_url | relative_url }}" {% if page.url==author_url %}class="active" {% endif %}>
+					{{ author.name }} ({{ author.entries | size }})
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<div id="topics" class="drilldown">
+		<h3>Topics</h3>
+		<ul>
+			{% for topic_hash in site.data.topics %}
+			{% assign topic = topic_hash[1] %}
+			{% assign topic_size = topic.entries | size %}
+			{% if topic_size > 4 %}
+			<li>
+				{% capture topic_url %}/topics/{{ topic._id }}.html{% endcapture %}
+				<a href="{{ topic_url | relative_url }}" {% if page.url==topic_url %}class="active" {% endif %}>
+					{{ topic.name }} ({{ topic.entries | size }})
+				</a>
+			</li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
 </div>
 
 <div id="contact-list" class="text-center">

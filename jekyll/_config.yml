@@ -17,3 +17,8 @@ page_gen:
   dir: authors
   name_expr: record['_id']
   title_expr: '"By Author: " + record["_id"]'
+- data: topics
+  template: topic
+  dir: topics
+  name_expr: record['_id']
+  title_expr: '"By Topic: " + record["name"]'
